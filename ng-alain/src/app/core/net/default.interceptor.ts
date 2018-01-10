@@ -7,8 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { catchError } from 'rxjs/operators';
 import { map, mergeMap } from 'rxjs/operators';
-
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 
 /**
  * 默认HTTP拦截器，其注册细节见 `app.module.ts`
@@ -24,6 +23,9 @@ export class DefaultInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler):
         Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
+
+        // TIPS：原TOKEN信息已交由 `@delon/auth` 处理
+        // Document: http://ng-alain.com/docs/auth
 
         // 统一加上服务端前缀
         let url = req.url;

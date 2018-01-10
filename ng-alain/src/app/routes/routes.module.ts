@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '@shared/shared.module';
-import { environment } from '@env/environment';
 
-import { routes } from './routes';
+import { SharedModule } from '@shared/shared.module';
+import { RouteRoutingModule } from './routes-routing.module';
+import { environment } from '@env/environment';
 // dashboard pages
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardV1Component } from './dashboard/v1/v1.component';
+import { DashboardAnalysisComponent } from './dashboard/analysis/analysis.component';
+import { DashboardMonitorComponent } from './dashboard/monitor/monitor.component';
+import { DashboardWorkplaceComponent } from './dashboard/workplace/workplace.component';
 // passport pages
 import { UserLoginComponent } from './passport/login/login.component';
 import { UserRegisterComponent } from './passport/register/register.component';
@@ -17,12 +20,12 @@ import { Exception404Component } from './exception/404.component';
 import { Exception500Component } from './exception/500.component';
 
 @NgModule({
-    imports: [
-        SharedModule,
-        RouterModule.forRoot(routes, { useHash: environment.useHash })
-    ],
+    imports: [ SharedModule, RouteRoutingModule ],
     declarations: [
-        DashboardComponent,
+        DashboardV1Component,
+        DashboardAnalysisComponent,
+        DashboardMonitorComponent,
+        DashboardWorkplaceComponent,
         // passport pages
         UserLoginComponent,
         UserRegisterComponent,
@@ -32,9 +35,7 @@ import { Exception500Component } from './exception/500.component';
         Exception403Component,
         Exception404Component,
         Exception500Component
-    ],
-    exports: [
-        RouterModule
     ]
 })
+
 export class RoutesModule {}
