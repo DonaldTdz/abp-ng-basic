@@ -7,7 +7,8 @@ import { DelonModule } from './delon.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
-import { RoutesModule } from './routes/routes.module';
+//import { RoutesModule } from './routes/routes.module';
+import { HomeModule } from './home/home.module'
 import { LayoutModule } from './layout/layout.module';
 import { StartupService } from '@core/startup/startup.service';
 import { DefaultInterceptor } from '@core/net/default.interceptor';
@@ -43,7 +44,8 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         CoreModule,
         SharedModule,
         LayoutModule,
-        RoutesModule,
+        //RoutesModule,
+        HomeModule,
         // i18n
         TranslateModule.forRoot({
             loader: {

@@ -29,7 +29,8 @@ export class StartupService {
         return new Promise((resolve, reject) => {
             zip(
                 this.httpClient.get(`assets/i18n/${this.i18n.defaultLang}.json`),
-                this.httpClient.get('assets/app-data.json')
+                //this.httpClient.get('assets/app-data.json')
+                this.httpClient.get('assets/abp-data.json')
             ).subscribe(([langData, appData]) => {
                 // setting language data
                 this.translate.setTranslation(this.i18n.defaultLang, langData);
