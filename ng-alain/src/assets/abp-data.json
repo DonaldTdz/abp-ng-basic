@@ -30,13 +30,11 @@
             "children": [{
                 "text": "用户",
                 "link": "/admin/users",
-                "translate": "users",
-                "shortcut": true
+                "translate": "users"
             }, {
                 "text": "角色",
                 "link": "/admin/roles",
-                "translate": "roles",
-                "shortcut": true
+                "translate": "roles"
             }, {
                 "text": "租户",
                 "link": "/admin/tenants",
