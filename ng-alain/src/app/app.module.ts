@@ -5,10 +5,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DelonModule } from './delon.module';
 import { CoreModule } from './core/core.module';
+import { AbpModule, ABP_HTTP_PROVIDER } from '@abp/abp.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 //import { RoutesModule } from './routes/routes.module';
-import { HomeModule } from './home/home.module'
+//import { HomeModule } from './home/home.module'
+import { AppRoutingModule } from './app-routing.module';
 import { LayoutModule } from './layout/layout.module';
 import { StartupService } from '@core/startup/startup.service';
 import { DefaultInterceptor } from '@core/net/default.interceptor';
@@ -23,6 +25,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { I18NService } from '@core/i18n/i18n.service';
 
+import { AppConsts } from '@shared/AppConsts';
+import { API_BASE_URL } from '@shared/service-proxies/service-proxies';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, `assets/i18n/`, '.json');
@@ -31,6 +36,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 export function StartupServiceFactory(startupService: StartupService): Function {
     return () => startupService.load();
 }
+
+export function getRemoteServiceBaseUrl(): string {
+    return AppConsts.remoteServiceBaseUrl;
+  }
 
 @NgModule({
     declarations: [
@@ -42,10 +51,12 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         HttpClientModule,
         DelonModule,
         CoreModule,
+        AbpModule,
         SharedModule,
         LayoutModule,
         //RoutesModule,
-        HomeModule,
+        //HomeModule,
+        AppRoutingModule,
         // i18n
         TranslateModule.forRoot({
             loader: {
@@ -60,6 +71,8 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true},
         { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true},
         { provide: ALAIN_I18N_TOKEN, useClass: I18NService, multi: false },
+        ABP_HTTP_PROVIDER,
+        { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },
         StartupService,
         {
             provide: APP_INITIALIZER,

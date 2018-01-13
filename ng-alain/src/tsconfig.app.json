@@ -13,7 +13,8 @@
         "@testing": [ "testing/" ],
         "@testing/*": [ "testing/*" ],
         "@env": [ "environments/" ],
-        "@env/*": [ "environments/*" ]
+        "@env/*": [ "environments/*" ],
+        "@abp/*": [ "../node_modules/abp-ng2-module/src/*" ]
     }
   },
   "exclude": [
