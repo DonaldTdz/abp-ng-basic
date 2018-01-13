@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 //import { AccountLanguagesComponent } from './layout/account-languages.component';
 
 import { LoginService } from './login/login.service';
+import { AppSessionService } from '../shared/session/app-session.service';
 
 @NgModule({
     imports: [
@@ -38,7 +39,8 @@ import { LoginService } from './login/login.service';
         //AccountLanguagesComponent
     ],
     providers: [
-        LoginService
+        LoginService,
+        AppSessionService
     ]
 })
 export class AccountModule {

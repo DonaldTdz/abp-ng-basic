@@ -20,6 +20,8 @@ const COMPONENTS = [];
 const DIRECTIVES = [];
 // endregion
 
+import { AppSessionService } from './session/app-session.service';
+
 @NgModule({
     imports: [
         CommonModule,
