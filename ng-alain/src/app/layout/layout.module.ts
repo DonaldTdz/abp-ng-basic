@@ -14,6 +14,8 @@ import { HeaderFullScreenComponent } from './default/header/components/fullscree
 import { HeaderLangsComponent } from './default/header/components/langs.component';
 import { HeaderStorageComponent } from './default/header/components/storage.component';
 import { HeaderUserComponent } from './default/header/components/user.component';
+//集成abp 2018-1-4
+import { AppAuthService } from '@shared/auth/app-auth.service';
 
 const COMPONENTS = [
     LayoutDefaultComponent,
@@ -42,7 +44,7 @@ const PASSPORT = [
 
 @NgModule({
     imports: [SharedModule],
-    providers: [],
+    providers: [AppAuthService],
     declarations: [
         ...COMPONENTS,
         ...HEADERCOMPONENTS,

@@ -1,7 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { SettingsService } from '@delon/theme';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
+//abp集成 2018-1-14
+import { AppAuthService } from '@shared/auth/app-auth.service';
+import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
     selector: 'header-user',
@@ -20,14 +23,16 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
     </nz-dropdown>
     `
 })
-export class HeaderUserComponent implements OnInit {
-    constructor(
+export class HeaderUserComponent extends AppComponentBase implements OnInit  {
+    constructor(injector: Injector, 
         public settings: SettingsService,
         private router: Router,
-        @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService) {}
+        @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private _authService: AppAuthService) {
+            super(injector);
+        }
 
     ngOnInit(): void {
-        this.tokenService.change().subscribe((res: any) => {
+        /*this.tokenService.change().subscribe((res: any) => {
             this.settings.setUser(res);
         });
         // mock
@@ -37,11 +42,12 @@ export class HeaderUserComponent implements OnInit {
             avatar: './assets/img/zorro.svg',
             email: 'cipchk@qq.com'
         };
-        this.tokenService.set(token);
+        this.tokenService.set(token);*/
     }
 
     logout() {
-        this.tokenService.clear();
-        this.router.navigateByUrl(this.tokenService.login_url);
+        //this.tokenService.clear();
+        //this.router.navigateByUrl(this.tokenService.login_url);
+        this._authService.logout();
     }
 }

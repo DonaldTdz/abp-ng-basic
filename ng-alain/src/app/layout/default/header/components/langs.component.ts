@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { SettingsService, MenuService } from '@delon/theme';
 import { I18NService } from '@core/i18n/i18n.service';
+//abp 集成
+import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
     selector: 'header-langs',
@@ -19,15 +21,17 @@ import { I18NService } from '@core/i18n/i18n.service';
     </nz-dropdown>
     `
 })
-export class HeaderLangsComponent {
+export class HeaderLangsComponent extends AppComponentBase {
 
     langs: any[];
 
     constructor(
+        injector: Injector,
         private menuService: MenuService,
         public settings: SettingsService,
         public tsServ: I18NService
     ) {
+        super(injector);
         this.langs = this.tsServ.getLangs();
     }
 
@@ -36,5 +40,18 @@ export class HeaderLangsComponent {
             this.menuService.resume();
         });
         this.settings.setLayout('lang', lang);
+        //集成abp部分
+        this.abpchange(lang);
+    }
+
+    //集成abp 2018-1-14
+    abpchange(lang: string) {
+        abp.utils.setCookieValue(
+            "Abp.Localization.CultureName",
+            lang,
+            new Date(new Date().getTime() + 5 * 365 * 86400000), //5 year
+            abp.appPath
+          );
+          location.reload();
     }
 }

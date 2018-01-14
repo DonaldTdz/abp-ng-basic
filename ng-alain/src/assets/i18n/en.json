@@ -101,5 +101,10 @@
     "system": "System",
     "admin": "Authorization Management",
     "roles": "Role",
-    "tenants": "Tenant"
+    "tenants": "Tenant",
+    "homeindex": {
+     "title":"Home",
+     "welcome":"Welcome!"
+    }
 }
+

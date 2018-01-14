@@ -75,6 +75,7 @@ export class LoginService {
         );
 
         var initialUrl = UrlHelper.initialUrl;
+        //添加#号处理
         if (initialUrl.indexOf('/login') > 0 || initialUrl == AppConsts.appBaseUrl + '/#/') {
             initialUrl = AppConsts.appBaseUrl;
         }

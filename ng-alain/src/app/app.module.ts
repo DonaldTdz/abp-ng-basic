@@ -24,22 +24,47 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { I18NService } from '@core/i18n/i18n.service';
-
+//abp 集成
+import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 import { AppConsts } from '@shared/AppConsts';
 import { API_BASE_URL } from '@shared/service-proxies/service-proxies';
+import { AppSessionService } from '@shared/session/app-session.service';
+import { AppPreBootstrap } from './AppPreBootstrap';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, `assets/i18n/`, '.json');
 }
 
-export function StartupServiceFactory(startupService: StartupService): Function {
-    return () => startupService.load();
+//export function StartupServiceFactory(startupService: StartupService): Function {
+export function StartupServiceFactory(injector: Injector): Function {//abp 集成
+    //return () => startupService.load();
+    return () => {
+        return new Promise<boolean>((resolve, reject) => {
+          AppPreBootstrap.run(() => {
+            var appSessionService: AppSessionService = injector.get(AppSessionService);
+            appSessionService.init().then(
+              (result) => {
+                resolve(result);
+              },
+              (err) => {
+                reject(err);
+              }
+            );
+            var startupService: StartupService = injector.get(StartupService);
+            startupService.load();
+          });
+        });
+      }
 }
 
 export function getRemoteServiceBaseUrl(): string {
     return AppConsts.remoteServiceBaseUrl;
-  }
+}
+
+export function getCurrentLanguage(): string {
+    return abp.localization.currentLanguage.name;
+}
 
 @NgModule({
     declarations: [
@@ -51,7 +76,8 @@ export function getRemoteServiceBaseUrl(): string {
         HttpClientModule,
         DelonModule,
         CoreModule,
-        AbpModule,
+        AbpModule,  //abp 集成
+        ServiceProxyModule, //abp 集成
         SharedModule,
         LayoutModule,
         //RoutesModule,
@@ -67,17 +93,19 @@ export function getRemoteServiceBaseUrl(): string {
         })
     ],
     providers: [
-        { provide: LOCALE_ID, useValue: 'zh-Hans' },
+        //{ provide: LOCALE_ID, useValue: 'zh-Hans' },
+        { provide: LOCALE_ID, useFactory: getCurrentLanguage }, //abp 集成
         { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true},
         { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true},
         { provide: ALAIN_I18N_TOKEN, useClass: I18NService, multi: false },
-        ABP_HTTP_PROVIDER,
-        { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },
+        ABP_HTTP_PROVIDER,//abp 集成
+        { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },//abp 集成
         StartupService,
+        AppSessionService,
         {
             provide: APP_INITIALIZER,
             useFactory: StartupServiceFactory,
-            deps: [StartupService],
+            deps: [Injector/*StartupService*/],
             multi: true
         }
     ],

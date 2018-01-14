@@ -4,6 +4,8 @@ import { LayoutModule } from '../layout/layout.module';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { IndexComponent } from './index.component';
+//权限判断
+import { AppRouteGuard } from '../shared/auth/auth-route-guard';
 
 @NgModule({
   imports: [
@@ -11,6 +13,7 @@ import { IndexComponent } from './index.component';
     LayoutModule,
     HomeRoutingModule
   ],
-  declarations: [ IndexComponent]
+  declarations: [IndexComponent],
+  providers: [ AppRouteGuard ]
 })
 export class HomeModule { }
