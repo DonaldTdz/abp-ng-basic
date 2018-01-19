@@ -64,7 +64,7 @@ export class AppSessionService {
                 //添加Alain框架设置user
                 if (this._user) {
                     let user = { name: this._user.name, email: this._user.emailAddress };
-                    this.settingService.setUser(user);
+                    this.settingService.setUser(user);//目前abp setting和 alain setting还未整合到一起，先兼容 保留两个一起使用
                 }
                 resolve(true);
             }, (err) => {
