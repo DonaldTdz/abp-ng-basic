@@ -8,6 +8,7 @@ import { UsersComponent } from './users/users.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { CreateUserComponent } from "./users/create-user/create-user.component";
 import { RolesComponent } from './roles/roles.component';
+import { CreateRoleComponent } from "./roles/create-role/create-role.component";
 
 //权限判断
 import { AppRouteGuard } from '../shared/auth/auth-route-guard';
@@ -23,7 +24,8 @@ import { AppRouteGuard } from '../shared/auth/auth-route-guard';
     UsersComponent,
     EditUserComponent,
     CreateUserComponent,
-    RolesComponent
+    RolesComponent,
+    CreateRoleComponent
    ],
    providers: [ AppRouteGuard ]
 })

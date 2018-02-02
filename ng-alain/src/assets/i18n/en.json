@@ -109,7 +109,10 @@
     "rolepage":{
         "title":"Role Management",
         "name":"Role Name",
-        "displayname":"Role Display Name"
+        "displayname":"Role Display Name",
+        "create":"Create new role",
+        "description":"Description",
+        "permissions":"Permissions"
     }
 }
 

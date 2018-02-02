@@ -2,7 +2,7 @@ import { Component, Injector, ViewChild } from '@angular/core';
 import { PagedListingComponentBase, PagedRequestDto } from "@shared/paged-listing-component-base";
 import { RoleServiceProxy, RoleDto, PagedResultDtoOfRoleDto } from "@shared/service-proxies/service-proxies";
 //import { appModuleAnimation } from '@shared/animations/routerTransition';
-//import { CreateRoleComponent } from "app/roles/create-role/create-role.component";
+import { CreateRoleComponent } from "../roles/create-role/create-role.component";
 //import { EditRoleComponent } from "app/roles/edit-role/edit-role.component";
 
 @Component({
@@ -11,7 +11,7 @@ import { RoleServiceProxy, RoleDto, PagedResultDtoOfRoleDto } from "@shared/serv
 })
 export class RolesComponent extends PagedListingComponentBase<RoleDto> {
 
-	//@ViewChild('createRoleModal') createRoleModal: CreateRoleComponent;
+	@ViewChild('createRoleModal') createRoleModal: CreateRoleComponent;
 	//@ViewChild('editRoleModal') editRoleModal: EditRoleComponent;
 	
 	roles: RoleDto[] = [];
@@ -54,7 +54,7 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
 
 	// Show Modals
 	createRole(): void {
-	//	this.createRoleModal.show();
+		this.createRoleModal.show();
 	}
 
 	editRole(role:RoleDto): void {

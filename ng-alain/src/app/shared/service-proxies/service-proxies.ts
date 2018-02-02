@@ -1790,6 +1790,7 @@ export class PermissionDto implements IPermissionDto {
     displayName: string;
     description: string;
     id: number;
+    checked: boolean;
 
     constructor(data?: IPermissionDto) {
         if (data) {

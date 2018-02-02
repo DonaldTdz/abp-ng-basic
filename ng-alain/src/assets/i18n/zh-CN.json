@@ -109,6 +109,9 @@
     "rolepage":{
         "title":"角色管理",
         "name":"角色名",
-        "displayname":"角色显示名"
+        "displayname":"角色显示名",
+        "create":"创建角色",
+        "description":"角色描述",
+        "permissions":"权限控制"
     }
 }
