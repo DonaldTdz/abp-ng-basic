@@ -105,6 +105,11 @@
     "homeindex": {
      "title":"Home",
      "welcome":"Welcome!"
+    },
+    "rolepage":{
+        "title":"Role Management",
+        "name":"Role Name",
+        "displayname":"Role Display Name"
     }
 }
 

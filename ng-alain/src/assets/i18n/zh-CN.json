@@ -105,5 +105,10 @@
     "homeindex": {
      "title":"主页",
      "welcome":"欢迎!"
+    },
+    "rolepage":{
+        "title":"角色管理",
+        "name":"角色名",
+        "displayname":"角色显示名"
     }
 }

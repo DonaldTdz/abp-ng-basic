@@ -7,6 +7,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { UsersComponent } from './users/users.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { CreateUserComponent } from "./users/create-user/create-user.component";
+import { RolesComponent } from './roles/roles.component';
 
 //权限判断
 import { AppRouteGuard } from '../shared/auth/auth-route-guard';
@@ -21,7 +22,8 @@ import { AppRouteGuard } from '../shared/auth/auth-route-guard';
   declarations: [ 
     UsersComponent,
     EditUserComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    RolesComponent
    ],
    providers: [ AppRouteGuard ]
 })
