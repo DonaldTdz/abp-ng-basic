@@ -12,6 +12,9 @@ preloaderFinished();
 if (environment.production) {
   enableProdMode();
 }
+else {
+  enableProdMode();
+}
 
 const bootstrap = () => {
     return platformBrowserDynamic().bootstrapModule(AppModule, {

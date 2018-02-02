@@ -14,7 +14,7 @@ const routes: Routes = [
         data: { preload: true }
     },
     {
-        path: 'admin',   //component: LayoutComponent,
+        path: 'admin',
         loadChildren: './admin/admin.module#AdminModule', //Lazy load account module
         data: { preload: true }
     },
